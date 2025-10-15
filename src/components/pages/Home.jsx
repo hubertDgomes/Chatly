@@ -3,7 +3,7 @@ import GridDistortion from "../layouts/GridDistortion";
 import TextType from "../layouts/TextType";
 import { useNavigate } from "react-router-dom";
 import { sign } from "three/tsl";
-
+import logo from '/src/assets/banner.jpg'
 const Home = () => {
   const navigator = useNavigate()
   const logBtn = ()=>{
@@ -16,7 +16,7 @@ const Home = () => {
     <>
       <div style={{ width: "100%", height: "750px", position: "relative" }}>
         <GridDistortion
-          imageSrc="/src/assets/banner.jpg"
+          imageSrc={logo}
           grid={10}
           mouse={0.1}
           strength={0.15}

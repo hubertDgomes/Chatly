@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Container from "../Container";
-import { log, pass } from "three/tsl";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-    const navigator = useNavigate()
   const [userData, setUserData] = useState({
     Name: "",
     Email: "",
@@ -38,6 +40,7 @@ const Signup = () => {
   //   Password
 
   // Firebase Part
+  const navigator = useNavigate();
   const handelSubmit = (e) => {
     e.preventDefault();
     if (!userData.Name || !userData.Email || !userData.Password) {
@@ -46,22 +49,17 @@ const Signup = () => {
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, userData.Email, userData.Password)
         .then((userCredential) => {
-          // Signed up
-          const user = userCredential.user;
-          toast.success('Sign Up Done')
-        //   {setInterval(()=>{
-        //     navigator("/login")
-        //   },500)}
-          // ...
+          sendEmailVerification(auth.currentUser).then(() => {
+            const user = userCredential.user;
+            toast.success("Verification Email Has Been Sent");
+            console.log(user);
+            navigator("/login");
+          });
         })
         .catch((error) => {
-          const errorCode = error.code;
           const errorMessage = error.message;
-          toast.error(errorCode);
-          
-          // ..
+          toast.error(errorMessage);
         });
-        
     }
   };
   // Firebase Part

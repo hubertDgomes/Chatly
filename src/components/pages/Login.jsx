@@ -1,7 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "../Container";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const handlePass = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSign = (e) => {
+    e.preventDefault();
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        if (user.emailVerified === true) {
+          toast.success("Account is verified, procceds to Log in");
+        } else {
+          toast.error("Email Is not still Verified");
+        }
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        toast.error(errorMessage);
+      });
+  };
+
   return (
     <>
       <Container>
@@ -20,23 +51,33 @@ const Login = () => {
                 <div className="card-body">
                   <fieldset className="fieldset">
                     <label className="label">Email</label>
-                    <input type="email" className="input" placeholder="Email" />
+                    <input
+                      onChange={handleEmail}
+                      type="email"
+                      className="input"
+                      placeholder="Email"
+                    />
                     <label className="label">Password</label>
                     <input
                       type="password"
+                      onChange={handlePass}
                       className="input"
                       placeholder="Password"
                     />
-                    <div>
-                      <a className="link link-hover">Forgot password?</a>
-                    </div>
-                    <button className="btn btn-neutral mt-4">Login</button>
+
+                    <button
+                      onClick={handleSign}
+                      className="btn btn-neutral mt-4"
+                    >
+                      Login
+                    </button>
                   </fieldset>
                 </div>
               </form>
             </div>
           </div>
         </div>
+        <Toaster />
       </Container>
     </>
   );

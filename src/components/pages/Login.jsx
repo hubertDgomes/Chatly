@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Container from "../Container";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigator = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleEmail = (e) => {
@@ -23,8 +25,9 @@ const Login = () => {
         console.log(user);
         if (user.emailVerified === true) {
           toast.success("Account is verified, procceds to Log in");
+          navigator("/dashboard")
         } else {
-          toast.error("Email Is not still Verified");
+          toast.error("Email Is Not Verified, Check Your Email, If not found please check your Spam!");
         }
       })
       .catch((error) => {

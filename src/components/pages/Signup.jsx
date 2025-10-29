@@ -4,6 +4,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  updateProfile 
 } from "firebase/auth";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -51,6 +52,17 @@ const Signup = () => {
         .then((userCredential) => {
           sendEmailVerification(auth.currentUser).then(() => {
             const user = userCredential.user;
+            updateProfile(auth.currentUser, {
+              displayName: userData.Name,
+              photoURL: "/user.jpg",
+            })
+              .then(() => {
+                // Profile updated!
+                // ...
+              })
+              .catch((error) => {
+                toast.error(error);
+              });
             toast.success("Verification Email Has Been Sent");
             console.log(user);
             navigator("/login");

@@ -3,8 +3,14 @@ import Container from "../Container";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { userInfoLogin } from "../../slices/userSlices";
+
 
 const Login = () => {
+  const data = useSelector((state) => state.userInformation.value)
+  console.log(data);
+  
   const navigator = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,10 +41,20 @@ const Login = () => {
         toast.error(errorMessage);
       });
   };
-
+  const dispatch = useDispatch()
+  const handleGo = ()=>{
+    const data = {
+      name: "Hubert",
+      age: 22
+    }
+    dispatch(userInfoLogin(data))
+  }
   return (
     <>
       <Container>
+        <button
+        onClick={handleGo}
+        >Go up</button>
         <div className="hero py-[30px]">
           <div className="hero-content flex-col lg:flex-row-reverse">
             <div className="text-center lg:text-left">

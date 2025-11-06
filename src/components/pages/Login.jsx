@@ -6,14 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userInfoLogin } from "../../slices/userSlices";
 
-
 const Login = () => {
-  const data = useSelector((state) => state.userInformation.value)
+  const data = useSelector((state) => state.userInformation.value);
   console.log(data);
-  
-  const navigator = useNavigate()
+
+  const navigator = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -31,9 +31,12 @@ const Login = () => {
         console.log(user);
         if (user.emailVerified === true) {
           toast.success("Account is verified, procceds to Log in");
-          navigator("/dashboard")
+          navigator("/dashboard");
+          dispatch(userInfoLogin(user));
         } else {
-          toast.error("Email Is Not Verified, Check Your Email, If not found please check your Spam!");
+          toast.error(
+            "Email Is Not Verified, Check Your Email, If not found please check your Spam!"
+          );
         }
       })
       .catch((error) => {
@@ -41,20 +44,10 @@ const Login = () => {
         toast.error(errorMessage);
       });
   };
-  const dispatch = useDispatch()
-  const handleGo = ()=>{
-    const data = {
-      name: "Hubert",
-      age: 22
-    }
-    dispatch(userInfoLogin(data))
-  }
+
   return (
     <>
       <Container>
-        <button
-        onClick={handleGo}
-        >Go up</button>
         <div className="hero py-[30px]">
           <div className="hero-content flex-col lg:flex-row-reverse">
             <div className="text-center lg:text-left">

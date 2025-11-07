@@ -39,7 +39,7 @@ const Dashboard = () => {
   return (
     <>
       <div className="flex items-center justify-center h-screen p-4 bg-white/20 gap-x-[30px]">
-        <div className="flex flex-col py-[40px] px-[45px] bg-blue-600 items-center gap-y-[60px] gap-x-[20px] text-[50px] rounded-2xl">
+        <div className="md:flex hidden flex-col py-[40px] px-[45px] bg-blue-600 items-center gap-y-[60px] gap-x-[20px] text-[50px] rounded-2xl ">
           <Images
             src={user}
             className={"w-[100px] ml-[100px] md:ml-0 rounded-[50px]"}

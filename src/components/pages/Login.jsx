@@ -32,8 +32,9 @@ const Login = () => {
         if (user.emailVerified === true) {
           toast.success("Account is verified, procceds to Log in");
           navigator("/dashboard");
+          localStorage.setItem("userInfoLogin", JSON.stringify(user));
           dispatch(userInfoLogin(user));
-          localStorage.getItem("userInfoLogin", JSON.stringify((user)))
+          // localStorage.getItem("userInfoLogin", JSON.stringify(user))
         } else {
           toast.error(
             "Email Is Not Verified, Check Your Email, If not found please check your Spam!"

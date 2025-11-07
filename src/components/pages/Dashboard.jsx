@@ -65,9 +65,8 @@ const Dashboard = () => {
               />
               <div className="flex flex-col gap-y-[20px]">
                 
-                <p className="my-[20px] font-Poppins font-semibold text-[20px]">Hi There!</p>
-                <p className="my-[20px] font-Poppins font-semibold text-[20px]">{data.displayName}</p>
-                <p className="my-[20px] font-Poppins font-semibold text-[20px]">{data.displayName}</p>
+                <p className="mt-[20px] font-Poppins font-semibold text-[20px]">Hi There!</p>
+                <p className="font-Poppins font-semibold text-[20px]">{data.displayName}</p>
                 {groupName.map((item, index) => (
                   <Contact
                     src={logo}

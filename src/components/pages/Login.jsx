@@ -33,6 +33,7 @@ const Login = () => {
           toast.success("Account is verified, procceds to Log in");
           navigator("/dashboard");
           dispatch(userInfoLogin(user));
+          localStorage.getItem("userInfoLogin", JSON.stringify((user)))
         } else {
           toast.error(
             "Email Is Not Verified, Check Your Email, If not found please check your Spam!"

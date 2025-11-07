@@ -7,6 +7,7 @@ import { IoIosNotifications } from "react-icons/io";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoLogInOutline } from "react-icons/io5";
 import logo from "/src/assets/logo2.png";
+import { useSelector } from "react-redux";
 const Contact = ({ src, chatName, unread, btn }) => {
   return (
     <>
@@ -27,6 +28,7 @@ const Contact = ({ src, chatName, unread, btn }) => {
 };
 
 const Dashboard = () => {
+  const data = useSelector((state) => state.userInformation.value)
   const groupName = ["Friends Reunion", "Friends Forever", "Crazy Cousins"];
   const unreadMsg = [
     "Hi Guys, Wassup!",
@@ -62,7 +64,10 @@ const Dashboard = () => {
 
               />
               <div className="flex flex-col gap-y-[20px]">
-                <p className="my-[20px] font-Poppins font-semibold text-[20px]">Group List</p>
+                
+                <p className="my-[20px] font-Poppins font-semibold text-[20px]">Hi There!</p>
+                <p className="my-[20px] font-Poppins font-semibold text-[20px]">{data.displayName}</p>
+                <p className="my-[20px] font-Poppins font-semibold text-[20px]">{data.displayName}</p>
                 {groupName.map((item, index) => (
                   <Contact
                     src={logo}

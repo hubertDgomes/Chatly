@@ -2,7 +2,6 @@ import React from "react";
 import GridDistortion from "../layouts/GridDistortion";
 import TextType from "../layouts/TextType";
 import { useNavigate } from "react-router-dom";
-import { sign } from "three/tsl";
 import logo from '/src/assets/banner.jpg'
 const Home = () => {
   const navigator = useNavigate()
